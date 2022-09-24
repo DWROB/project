@@ -5,20 +5,35 @@ A todo list designed to help me, and others, keep an easy record of tasks, appoi
 
 Initial design is for desktop use only.
 
-# /project
-app.py
+## /project
 
-ado.db
+1. **app.py**
+ - index
+ > show the users tasks, reminders in an ordered fashion that allow them to see what they need to complete that day/week.
 
-README.md
+ - new task
+ > form for creating a customizable task 
+ > date, subject, color-flag, additional notes, category.
+ > **category**
+*task, appointment, event, note + other customisable cats*
 
-# /static
-images:
--project_logo.png
+ - pomotimer
+ > structured in the trad sense. 
+ > should record the levels of focus used. 
 
-stylesheet:
--styles.css 
+2. **ado.db**
 
-# / templates
-layout.html
+3. **README.md**
+
+## /static
+
+1. **images:**
+   > project_logo.png
+
+2. **stylesheet:**
+    > styles.css 
+
+## /templates
+
+1. >layout.html
 

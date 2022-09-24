@@ -10,3 +10,10 @@ app = Flask(__name__)
 con = sqlite3.connect("ado.db")
 
 
+# homepage
+@app.route("/")
+def homepage():
+    """Show the users current lists and tasks"""
+    return render_template("layout.html")
+
+ 

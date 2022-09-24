@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "../../gitrepo/89933924"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"stdlib.h": "c"
+		}
+	}
+}
