@@ -8,22 +8,27 @@ Initial design is for desktop use only.
 ## /project
 
 1. **app.py**
- - index
+- /login
+
+- /logout
+
+ - homepage
  > show the users tasks, reminders in an ordered fashion that allow them to see what they need to complete that day/week.
 
- - new task
+ - /createNewTask
  > form for creating a customizable task 
  > date, subject, color-flag, additional notes, category.
  > **category**
 *task, appointment, event, note + other customisable cats*
 
- - pomotimer
+ - /pomodoroTimer
  > structured in the trad sense. 
  > should record the levels of focus used. 
 
 2. **ado.db**
 
-3. **README.md**
+3. **helpers.py**
+- decorated function to ensure user is logged in
 
 ## /static
 
@@ -36,4 +41,12 @@ Initial design is for desktop use only.
 ## /templates
 
 1. >layout.html
+2. >login.html
+3. >newTask.html
+4. >pomodoroTimer.html
+5. >todo.html [default under-construction page only]
 
+**requirements**
+- Flask
+- Flask-Session
+- requests
