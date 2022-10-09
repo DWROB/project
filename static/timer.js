@@ -4,13 +4,22 @@ document.addEventListener("DOMContentLoaded", function() {
     startBtn = document.getElementById("start-timer");
     cancelBtn = document.getElementById("cancel-timer");
     timerVisual = document.getElementById("timer-visual");
+
+    saveModal = document.getElementById("myModal")
  
     let selection;
     var intervalID;
  
     timeChoice.addEventListener("change", function(e) {
          selection = e.target.value;
-         console.log(selection)
+         console.log(selection);
+
+         // trying to get the modal up
+         saveModal.setAttribute("visibility", "visible");
+     //     saveModal.classList.remove('visible');
+
+
+
          return selection;    
          
     });

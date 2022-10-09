@@ -100,7 +100,7 @@ def logout():
 @app.route("/pomodoroTimer", methods=["GET", "POST"])
 @login_required
 def pomodoroTimer():
-    # POST, timer is zero
+    # POST, user submits to save the time
 
 
     # if GET render the timer page. 

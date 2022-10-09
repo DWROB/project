@@ -9,7 +9,7 @@ A todo list designed to help me, and others, keep an easy record of tasks, appoi
 
 The site will include a classic pomodoro timer.  User will be able to select a typical 25 minute interval for focussing.  The app includes the classical incremental pomodoro structure, with longer periods to train ability to focus for longer periods.    
 
-Initial design is for desktop use only.
+Initial design is for desktop use only.  The main consideration being that my use of modals, coupled with my inexperience, means that it would take longer to create. 
 
 Using the Flask framework, the app will:
 

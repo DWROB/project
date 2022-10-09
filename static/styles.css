@@ -3,3 +3,19 @@ body
     background-color: #F9EDC4;
 }
 
+.modal {
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+}
+/* 
+.modal.close {
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.modal.visible {
+    opacity: 1;
+    visibility: visible;
+}  */
