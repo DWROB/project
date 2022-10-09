@@ -1,12 +1,28 @@
 {% extends "layout.html" %}
 
+{% block javascript %}
+<script src="static/timer.js"></script>
+{% endblock %}
+
 {% block title %}
     Pomo Timer
 {% endblock %}
 
 {% block main %}
-
-    <script>
-
-    </script>
+    <div class="container-lg">
+        <h1 class="display-1" id="timer-visual">00:00</h1>
+        <select name="choose-time" id="time-select">
+            <option selected disabled>Choose a pomo</option>
+            <option value="1">5 sec</option>
+            <option value="2">30</option>
+            <option value="3">35</option>
+            <option value="4">40</option>
+        </select>
+        <button type="button" id="start-timer">Start</button>
+        <button type="button" id="cancel-timer">Cancel</button>
+    </div>
+    <br>
+    <div class="container-lg">
+        EMPTY CONTAINER
+    </div>
 {% endblock %}

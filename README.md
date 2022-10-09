@@ -1,7 +1,13 @@
-# project
-CS50 Final project - ADHDO
+# MaDho
+
+#### Video Demo:  url.
+
+
+#### Description:
 
 A todo list designed to help me, and others, keep an easy record of tasks, appointments and events.
+
+The site will include a classic pomodoro timer.  User will be able to select a typical 25 minute interval for focussing.  The app includes the classical incremental pomodoro structure, with longer periods to train ability to focus for longer periods.    
 
 Initial design is for desktop use only.
 

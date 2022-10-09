@@ -5,11 +5,15 @@
 		},
 		{
 			"path": ".."
+		},
+		{
+			"path": "../../Documents/CS50 Final Project/project_html_workspace"
 		}
 	],
 	"settings": {
 		"files.associations": {
 			"stdlib.h": "c"
-		}
+		},
+		"liveServer.settings.multiRootWorkspaceName": "project_html_workspace"
 	}
 }
