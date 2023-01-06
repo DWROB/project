@@ -5,42 +5,29 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/newTask" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" name="taskSubject" autofocus class="form-control mx-auto w-auto" type="text" placeholder="Task subject (80 letters max)" maxlength="80">
-        </div>
-        <div class="mb-3">
-            <label for="taskDate">Due Date</label>
-            <input autocomplete="off" name="taskDate" id="taskDate" class="form-control mx-auto w-auto" type="date">
-        </div>
-        <div class="mb-3">
-            <label for="taskTime">time</label>
-            <input autocomplete="off" name="taskTime" id="taskTime" class="form-control mx-auto w-auto" type="time">
-        </div>
-        <div class="mb-3">
-            <input autocomplete="off" name="taskLocation" autofocus class="form-control mx-auto w-auto" type="text" placeholder="location" maxlength="500">
-        </div>
-        <div class="mb-3">
-            <input autocomplete="off" name="taskNotes" autofocus class="form-control mx-auto w-auto" type="text" placeholder="additional notes" maxlength="5000">
-        </div>
-        <!-- choose category / colored / titled + make your own category? -->
-        <div class="dropdown">
-            <a class="btn btn-info dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Category
-            </a>
+  <form action="/newTask" method="post">
+    <input autocomplete="off" name="taskSubject" autofocus class="form-control mx-auto w-auto" type="text" placeholder="Task subject (80 letters max)" maxlength="80">
+    <label for="taskDate">Due Date</label>
+    <input autocomplete="off" name="taskDate" id="taskDate" class="form-control mx-auto w-auto" type="date">
+    <label for="taskTime">time</label>
+    <input autocomplete="off" name="taskTime" id="taskTime" class="form-control mx-auto w-auto" type="time">
+    <input autocomplete="off" name="taskLocation" autofocus class="form-control mx-auto w-auto" type="text" placeholder="location" maxlength="500">
+    <input autocomplete="off" name="taskNotes" autofocus class="form-control mx-auto w-auto" type="text" placeholder="additional notes" maxlength="5000">
+      <!-- choose category / colored / titled + make your own category? -->
+    <div class="dropdown">
+      <a class="btn btn-info dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Category
+      </a>
 
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Task</a></li>
-                <li><a class="dropdown-item" href="#">Appointment</a></li>
-                <li><a class="dropdown-item" href="#">Event</a></li>
-                <li><a class="dropdown-item" href="#">Note</a></li>
-            </ul>
-        </div>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Task</a></li>
+        <li><a class="dropdown-item" href="#">Appointment</a></li>
+        <li><a class="dropdown-item" href="#">Event</a></li>
+        <li><a class="dropdown-item" href="#">Note</a></li>
+      </ul>
+    </div>
 
 
-        <button class="btn btn-primary" type="submit">Save</button>
-    </form>
-    <script>
-
-    </script>
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
 {% endblock %}

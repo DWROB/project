@@ -1,20 +1,35 @@
+@import url("components/forms.css");
+@import url("components/navbar.css");
+@import url("components/cards.css");
+
 body {
-  background-color: #f9edc4;
-}
+    background-color: #FFFFFF;
+    color: #233D4D;
+  }
 
 .modal {
-  top: 0;
-  visibility: hidden;
-  opacity: 0;
-}
-/*
-.modal.close {
     top: 0;
     visibility: hidden;
     opacity: 0;
+  }
+
+.primary-btn {
+  background-color: #00ABF5;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #2BC9DE;
+  color: white;
 }
 
-.modal.visible {
-    opacity: 1;
-    visibility: visible;
-}  */
+.primary-btn:hover {
+  background-color: #1FBCFF;
+  border-color: #008FCC;
+}
+
+.info-btn {
+  background-color: #9DBED2;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #477A9A;
+  color: white;
+}
