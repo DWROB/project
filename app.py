@@ -1,27 +1,38 @@
 import os
-import sqlite3
 
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
-from helpers import apology, login_required, loginCheck, registerNewUser
+from helpers import apology, login_required, loginCheck, registerNewUser, save_new_task, validate_task, get_user_tasks
 
 app = Flask(__name__)
-conn = sqlite3.connect("ado.db", check_same_thread=False)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["SECRET_KEY"] = "\xc8\x9cCr\x951\x8f\x8f\xe7\xe8\xbc\x8b"
 
+# flask-session config
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
+TASK_CATEGORIES = [
+    "Task",
+    "Appointment",
+    "Event",
+    "Note"
+]
 
 # homepage
 @app.route("/")
 @login_required
 def homepage():
     """Show the users current lists and tasks"""
-    return apology(message="homepage is TODO")
+    tasks = get_user_tasks(session["user_id"][0])
+
+    return render_template("homepage.html", tasks=tasks)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -42,7 +53,7 @@ def login():
 
 
         # ensure password and user are correct
-        checkedUser = loginCheck(conn, username, password)
+        checkedUser = loginCheck(username, password)
 
         # if ok, log the session
         if checkedUser != None:
@@ -79,7 +90,7 @@ def register():
         passwordStore = generate_password_hash(password)
 
 
-        if registerNewUser(conn, username, passwordStore):
+        if registerNewUser(username, passwordStore):
             return apology(message="success")
 
         return apology(message="user register failed")
@@ -103,17 +114,30 @@ def pomodoroTimer():
     # POST, user submits to save the time
 
 
-    # if GET render the timer page. 
+    # if GET render the timer page.
 
     return render_template("pomodoroTimer.html")
 
 
-@app.route("/createNewTask", methods=["GET", "POST"])
+@app.route("/newTask", methods=["GET", "POST"])
 @login_required
 def newTask():
-    # if POST add new task to con and return to /
+    # if POST add new task to db and return to /
+    if request.method == "POST":
+        task = {}
+        task['name'] = request.form.get("taskSubject")
+        task['date'] = request.form.get("taskDate")
+        task['time'] = request.form.get("taskTime")
+        task['location'] = request.form.get("taskLocation")
+        task['notes'] = request.form.get("taskNotes")
+        task['category'] = request.form.get("taskCategory")
 
+        if validate_task(task):
+            if save_new_task(task):
+                return apology(message="task saved")
+            # return to home
+            return apology("Failed to save")
+
+        return apology(message="task not valid, try again")
     # if GET render the form for creating a new task
-
-    return render_template("newTask.html")
-
+    return render_template("newTask.html", task_categories=TASK_CATEGORIES)
