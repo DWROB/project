@@ -1,0 +1,16 @@
+{% extends "layout.html" %} {% block javascript %}
+<script src="static/homepageCards.js"></script>
+{% endblock %} {% block title %} Your Tasks {% endblock %} {% block main %}
+<h1>Your tasks</h1>
+<div class="homepage-canvas">
+  {% for task in tasks %}
+  <div class="task-card" id="task-card">
+    <div id="task-card-drag">
+      <!-- <div class="task-card-text" id="task-name"> -->
+      <p>{{ task["task_name"] }}</p>
+      <!-- </div> -->
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
