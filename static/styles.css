@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 @import url("components/forms.css");
 @import url("components/navbar.css");
 @import url("components/cards.css");
@@ -5,6 +7,17 @@
 body {
     background-color: #FFFFFF;
     color: #233D4D;
+  }
+
+  .tasks-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    max-height: 40px;
   }
 
 .modal {

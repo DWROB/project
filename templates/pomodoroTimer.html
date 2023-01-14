@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container-lg">
-        <h1 class="display-1" id="timer-visual">00:00</h1>
+    <div class="pomo-container">
+        <h1 class="counter" id="timer-visual">00:00</h1>
         <select name="choose-time" id="time-select">
             <option selected disabled>Choose a pomo</option>
             <option value="1">5 sec</option>
@@ -18,29 +18,7 @@
             <option value="3">35</option>
             <option value="4">40</option>
         </select>
-        <button type="button" id="start-timer">Start</button>
-        <button type="button" id="cancel-timer">Cancel</button>
+        <button type="button" class="btn primary-btn" id="start-timer">Start</button>
+        <button type="button" class="btn button-warning" id="cancel-timer">Cancel</button>
     </div>
-    <br>
-    <div class="modal" id="myModal" tabindex="-1" role="dialog">
-        <form action="/pomodoroTimer" method="post">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                    </div>
-                            <div class="modal-body">
-                                <p>Pomo finished!</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" value="">Save changes</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard from your records</button>
-                            </div>
-                </div>
-            </div>
-        </form>
-      </div>
 {% endblock %}
