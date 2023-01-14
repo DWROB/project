@@ -116,26 +116,23 @@ def get_user_tasks(user_id):
 
     task_response = cur.fetchall()
 
-    # loop through response and put each task as a dict object
-    # 1 - task_name, 2 due, 3 created, 4 notes, 5 location, 6 category
-    # 7 time, 8 completed, 9 updated_at
     tasks = []
     for task_entry in task_response:
         task = {}
         task["task_name"] = task_entry[1]
         task["task_due"] = task_entry[2]
-        task["task_time"] = task_entry[7]
-        task["task_location"] = task_entry[5]
-        task["task_category"] = task_entry[6]
+        task["task_category"] = task_entry[7]
+        task["task_time"] = task_entry[8]
+        task["task_location"] = task_entry[6]
         task["task_notes"] = task_entry[4]
         task["task_created"] = task_entry[3]
         task["task_updated_at"] = task_entry[9]
+        task["task_id"] = task_entry[0]
 
-        if task_entry[8] == "0":
+        if task_entry[10] == "0":
             task["task_completed"] = False
         else:
             task["task_completed"] = True
         tasks.append(task)
 
     return tasks
-
