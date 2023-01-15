@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
@@ -131,7 +131,16 @@ def newTask():
     # if GET render the form for creating a new task
     return render_template("newTask.html", task_categories=TASK_CATEGORIES)
 
-@app.route("/taskHandler", "POST")
+@app.route("/taskHandler", methods=["GET", "POST"])
 @login_required
 def taskHandler():
-    return True
+    print(request)
+    if request.method == "POST":
+        req = request.get_json()
+        print(req)
+        id_delete = req['request']
+        print(id_delete)
+        
+        # delete method to helpers
+
+    return apology("route is only for post requests.")
