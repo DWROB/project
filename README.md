@@ -21,7 +21,6 @@ Using the Flask framework, the app will:
 - set existing tasks as complete
 - persist a record of all pending and completed tasks (give the user the option to delete all permanently if they want)
 - work on their computer using the pomodoro technique.
-- keep a record of the time they have dedicated to focussing with the timer.
 
 ## /project
 
