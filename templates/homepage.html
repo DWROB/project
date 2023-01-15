@@ -5,7 +5,7 @@
 <div class="tasks-container">
   <div class="homepage-canvas">
     {% for task in tasks %}
-    <div class="card-item">
+    <div class="card-item" id="{{ task['task_id'] }}">
       <div>
         <h3>{{ task["task_name"].capitalize() }}</h3>
       </div>

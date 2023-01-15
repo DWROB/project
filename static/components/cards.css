@@ -61,7 +61,7 @@
 }
 
 .task-done-color {
-  background-color: #7FC29B;
+  background-color: #7FC29B !important;
 }
 
 .times {

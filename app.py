@@ -131,5 +131,7 @@ def newTask():
     # if GET render the form for creating a new task
     return render_template("newTask.html", task_categories=TASK_CATEGORIES)
 
+@app.route("/taskHandler", "POST")
+@login_required
 def taskHandler():
     return True
