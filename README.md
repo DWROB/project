@@ -28,31 +28,31 @@ Using the Flask framework, the app will:
 ### app.py
 
 #### /(root)
-*if logged in: show the users tasks, reminders in an ordered fashion that allow them to see what they need to complete that day/week.
-*else: show the login screen with option to register.
+* if logged in: show the users tasks, reminders in an ordered fashion that allow them to see what they need to complete that day/week.
+* else: show the login screen with option to register.
 
 #### /login
-*Get - renders the login screen.
+* Get - renders the login screen.
 
-*Post - users login and password are checked on db.  If user exists and password matches, the users id is set as session["user_id"] for all actions.
+* Post - users login and password are checked on db.  If user exists and password matches, the users id is set as session["user_id"] for all actions.
 
 #### /register
-*Get - renders a form to create an account.
+* Get - renders a form to create an account.
 
-*Post - account created.  Werkzeug handling hashing of the password in db.
+* Post - account created.  Werkzeug handling hashing of the password in db.
 
 #### /logout
 
 #### /newTask
-*form for creating a customizable task
-*date, subject, color-flag, additional notes, category.
-*category
-..*task, appointment, event, note + other customisable cats*
+* form for creating a customizable task
+* date, subject, color-flag, additional notes, category.
+* category
+  * task, appointment, event, note + other customisable cats*
 
 #### /taskHandler
-*updates db from user actions on task-cards.
-..*Either change 'complete' to True/False.
-..*or Delete the task from the db.
+* updates db from user actions on task-cards.
+  * Either change 'complete' to True/False.
+  * or Delete the task from the db.
 
 ### ado.db
 
@@ -67,23 +67,23 @@ Using the Flask framework, the app will:
     ```
 
 ### helpers.py
-*decorated function to ensure user is logged in
-*all db interactions managed in helpers.
+* decorated function to ensure user is logged in
+* all db interactions managed in helpers.
 
 ## static
 
 1. stylesheet:
-*styles.css
-    ..* /components:
-      ..* cards.css
-      ..* forms.css
-      ..* navbar.css
-      ..* pomo-container.css
+* styles.css
+  * /components:
+  * cards.css
+  * forms.css
+  * navbar.css
+  * pomo-container.css
 
 2. JavaScript Files
-..*timer.js - manipulates DOM to show countdown for focus time.
-..*homepageCards.js - to handle drag and drop functions for the users cards
-..*homepageTaskHandler - to handle changes to card when task completed or deleted.  In addition to updating the db
+* timer.js - manipulates DOM to show countdown for focus time.
+* homepageCards.js - to handle drag and drop functions for the users cards
+* homepageTaskHandler - to handle changes to card when task completed or deleted.  In addition to updating the db
 
 ## templates
 
@@ -96,6 +96,6 @@ Using the Flask framework, the app will:
 7. homepage.html - index of all tasks belonging to user
 
 ## requirements.txt
-- Flask
-- Flask-Session
-- requests
+* Flask
+* Flask-Session
+* requests
