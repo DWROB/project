@@ -23,7 +23,7 @@
       src="https://kit.fontawesome.com/d9abe94cc1.js"
       crossorigin="anonymous"
     ></script>
-    <title>ADDO : {% block title %} {% endblock %}</title>
+    <title>ADO</title>
   </head>
 
   <body>
@@ -32,6 +32,7 @@
         <a class="navbar-brand" href="/"
           ><i class="fa-solid fa-clipboard-user"></i
         ></a>
+        <h1>ADO : {% block title %} {% endblock %}</h1>
         {% if session["user_id"] %}
         <ul class="nav-items">
           <li class="nav-item">

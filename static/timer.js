@@ -5,19 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   cancelBtn = document.getElementById("cancel-timer");
   timerVisual = document.getElementById("timer-visual");
 
-  saveModal = document.getElementById("myModal");
-
-  let selection;
+  var selection;
   var intervalID;
 
   timeChoice.addEventListener("change", function (e) {
     selection = e.target.value;
     console.log(selection);
-
-    // trying to get the modal up
-    saveModal.setAttribute("visibility", "visible");
-    //     saveModal.classList.remove('visible');
-
     return selection;
   });
 
@@ -25,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("start button " + selection);
     console.log(typeof selection);
 
-    let minutes;
-    let seconds;
+    var minutes;
+    var seconds;
 
     switch (selection) {
       case "1":
@@ -84,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (seconds === 0 && minutes === 0) {
         clearInterval(intervalID);
         timerVisual.innerText = "00:00";
-        alert("Fuckin' Finally");
+        alert("Good Job!");
       }
       return minutes, seconds;
     }
