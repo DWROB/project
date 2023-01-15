@@ -53,7 +53,7 @@ def usernameTaken(username):
 
 def registerNewUser(username, passwordStore):
     # is username available
-    if not usernameTaken(conn, username):
+    if not usernameTaken(username):
         insertQuery = "INSERT INTO users (username, hash) VALUES (?, ?)"
 
         userInput = [(username, passwordStore)]

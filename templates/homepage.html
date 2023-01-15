@@ -1,22 +1,23 @@
 {% extends "layout.html" %} {% block javascript %}
 <script src="static/homepageCards.js"></script>
+<script src="static/homepageTaskHandler.js" ></script>
 {% endblock %} {% block title %} Your Tasks {% endblock %} {% block main %}
 <div class="tasks-container">
   <div class="homepage-canvas">
     {% for task in tasks %}
-    <div class="card-item">
+    <div class="card-item" id="{{ task['task_id'] }}">
       <div>
-        <h3>{{ task["task_name"] }}</h3>
+        <h3>{{ task["task_name"].capitalize() }}</h3>
       </div>
       <div class="times">
         <p>{{ task["task_due"] }}</p>
         <p><strong>{{ task["task_time"] }}</strong></p>
       </div>
       <div>
-        <p>{{ task["task_location"] }}</p>
+        <p>{{ task["task_location"].capitalize() }}</p>
       </div>
       <div class="card-item-notes">
-        <p>{{ task["task_notes"] }}</p>
+        <p>{{ task["task_notes"].capitalize() }}</p>
       </div>
       <div class="card-task-buttons">
         <button
