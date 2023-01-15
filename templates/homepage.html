@@ -19,24 +19,22 @@
         <p>{{ task["task_notes"] }}</p>
       </div>
       <div class="card-task-buttons">
-        <form action="/task_handler" method="post">
-          <button
-            type="submit"
-            class="btn primary-btn"
-            name="done"
-            value="{{ task['task_id'] }}"
-          >
-            Done
-          </button>
-          <button
-            type="submit"
-            class="btn button-warning"
-            name="delete"
-            value="{{ task['task_id'] }}"
-          >
-            Delete
-          </button>
-        </form>
+        <button
+          type="submit"
+          class="btn primary-btn"
+          id="done"
+          value="{{ task['task_id'] }}"
+        >
+          Done
+        </button>
+        <button
+          type="submit"
+          class="btn button-warning"
+          id="delete"
+          value="{{ task['task_id'] }}"
+        >
+          Delete
+        </button>
       </div>
     </div>
     {% endfor %}
