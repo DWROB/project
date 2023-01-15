@@ -60,6 +60,10 @@
   margin: 0;
 }
 
+.task-done-color {
+  background-color: #7FC29B;
+}
+
 .times {
   display: flex;
   justify-content: space-between;

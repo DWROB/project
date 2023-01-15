@@ -7,9 +7,9 @@
 
 A todo list designed to help me, and others, keep an easy record of tasks, appointments and events.
 
-The site will include a classic pomodoro timer.  User will be able to select a typical 25 minute interval for focussing.  The app includes the classical incremental pomodoro structure, with longer periods to train ability to focus for longer periods.    
+The site will include a classic pomodoro timer.  User will be able to select a typical 25 minute interval for focussing.  The app includes the classical incremental pomodoro structure, with longer periods to train ability to focus for longer periods.
 
-Initial design is for desktop use only.  The main consideration being that my use of modals, coupled with my inexperience, means that it would take longer to create. 
+Initial design is for desktop use only.  The main consideration being that my use of modals, coupled with my inexperience, means that it would take longer to create.
 
 Using the Flask framework, the app will:
 
@@ -27,58 +27,78 @@ Using the Flask framework, the app will:
 
 ### app.py
 
+#### /(root)
+ > if logged in: show the users tasks, reminders in an ordered fashion that allow them to see what they need to complete that day/week.
+ > else: show the login screen with option to register.
+
 #### /login
-> Get - renders the login screen.    
+ > Get - renders the login screen.
 
-> Post - users login and password are checked on db.  If user exists and password matches, the users id is set as session["user_id"] for all actions.  
+ > Post - users login and password are checked on db.  If user exists and password matches, the users id is set as session["user_id"] for all actions.
 
+#### /register
+ > Get - renders a form to create an account.
+
+ > Post - account created.  Werkzeug handling hashing of the password in db.
 
 #### /logout
 
-#### /  (homepage)
- > show the users tasks, reminders in an ordered fashion that allow them to see what they need to complete that day/week.
-
-#### /createNewTask
- > form for creating a customizable task 
+#### /newTask
+ > form for creating a customizable task
  > date, subject, color-flag, additional notes, category.
  > category
     *task, appointment, event, note + other customisable cats*
 
-#### /pomodoroTimer
- > structured in the trad sense. 
- > should record the levels of focus used. 
+#### /taskHandler
+ > updates db from user actions on task-cards.
+     > Either change 'complete' to True/False.
+     > or Delete the task from the db.  
 
 ### ado.db
 
 1. USERS:
     ```sql
-    CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT NOT NULL, hash TEXT NOT NULL);
-    REATE TABLE sqlite_sequence(name,seq);
+    CREATE TABLE users (
+  ...> id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  ...> username TEXT NOT NULL,
+  ...> hash TEXT NOT NULL);
+
     ```
-2. TASKS: 
+2. TASKS:
     ``` sql
-    CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, task_head TEXT, due DATETIME, created DATETIME DEFAULT (datetime('now')), completed DATETIME, notes TEXT, user_id INTEGER,
-    FOREIGN KEY (user_id) REFERENCES users(id));
-    ```
-3. POMO_ARCHIVE:
-    ``` sql
-    CREATE TABLE pomo (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, pom_type NUMERIC, user_date DATETIME, user_id INTEGER, 
-    FOREIGN KEY (user_id) REFERENCES users(id));
+        CREATE TABLE tasks (
+  ...> id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  ...> task_head TEXT,
+  ...> due DATETIME,
+  ...> created_at DATETIME DEFAULT (datetime('now')),
+  ...> notes TEXT,
+  ...> user_id INTEGER,
+  ...> location TEXT,
+  ...> category TEXT,
+  ...> time TIME,
+  ...> complete BOOLEAN NOT NULL DEFAULT false,
+  ...> updated_at DATETIME,
+  ...> FOREIGN KEY (user_id) REFERENCES users(id));
     ```
 
 ### helpers.py
 - decorated function to ensure user is logged in
+- all db interactions managed in helpers.
 
 ## static
 
-1. images:
-   > project_logo.png
+1. stylesheet:
+    > styles.css
+    - /components:
+      > cards.css
+      > forms.css
+      > navbar.css
+      > pomo-container.css
 
-2. stylesheet:
-    > styles.css 
-
-3. JavaScript Files
-    > timer.js
+2. JavaScript Files
+    > timer.js - manipulates DOM to show countdown for focus time.
+    > homepageCards.js - to handle drag and drop functions for the users cards
+    > homepageTaskHandler - to handle changes to card when task completed or deleted.  In addition to updating the db
 
 ## templates
 
@@ -87,9 +107,10 @@ Using the Flask framework, the app will:
 3. >newTask.html
 4. >pomodoroTimer.html
 5. >register.html
-6. >todo.html
+6. >todo.html - error page
+7. >homepage.html - index of all tasks belonging to user
 
-## requirements.txt 
+## requirements.txt
 - Flask
 - Flask-Session
 - requests

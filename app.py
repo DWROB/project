@@ -91,7 +91,7 @@ def register():
 
 
         if registerNewUser(username, passwordStore):
-            return apology(message="success")
+            return redirect("/")
 
         return apology(message="user register failed")
 
@@ -108,17 +108,6 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/pomodoroTimer", methods=["GET", "POST"])
-@login_required
-def pomodoroTimer():
-    # POST, user submits to save the time
-
-
-    # if GET render the timer page.
-
-    return render_template("pomodoroTimer.html")
-
-
 @app.route("/newTask", methods=["GET", "POST"])
 @login_required
 def newTask():
@@ -134,10 +123,13 @@ def newTask():
 
         if validate_task(task):
             if save_new_task(task):
-                return apology(message="task saved")
+                return redirect("/")
             # return to home
             return apology("Failed to save")
 
         return apology(message="task not valid, try again")
     # if GET render the form for creating a new task
     return render_template("newTask.html", task_categories=TASK_CATEGORIES)
+
+def taskHandler():
+    return True
