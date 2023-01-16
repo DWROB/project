@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
           } else {
             doneBtn.innerText = "To Do!";
           }
-          // AJAX function to patch db and change completed: true or false.
+          doneTask(taskCard.id);
         }
       });
     });
@@ -39,22 +39,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  const deleteTask = (id) => {
-    console.log(`${window.origin}/taskHandler`);
-    fetch("/taskHandler", {
-      method: "POST",
+  const doneTask = (id) => {
+    fetch("/task_handler", {
+      method: "PUT",
       headers: new Headers({
         "Content-Type":"application/json"
       }),
       cache: "no-cache",
-      body: JSON.stringify({ "request": id })
+      body: JSON.stringify({ "task_id": id })
     })
     .then((response) => {
-      if (response.status != 200){
+      if (response.status != 200) {
+        console.log(`Request status is ${response.status}`);
+        console.log(response)
+        return;
+      }
+      response.json().then((data) => { console.log(data, response.status) })
+    })
+  }
+
+  const deleteTask = (id) => {
+    // console.log(`${window.origin}/task_handler`);
+    fetch("/task_handler", {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type":"application/json"
+      }),
+      cache: "no-cache",
+      body: JSON.stringify({ "task_id": id })
+    })
+    .then((response) => {
+      if (response.status != 200) {
         console.log(`Request status is ${response.status}`);
         return;
       }
-      response.json().then((data) => { console.log(data)});
+      response.json().then((data) => { console.log(data, response.data) });
     })
   }
 });

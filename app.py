@@ -5,7 +5,7 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
-from helpers import apology, login_required, loginCheck, registerNewUser, save_new_task, validate_task, get_user_tasks
+from helpers import apology, login_required, loginCheck, registerNewUser, save_new_task, validate_task, get_user_tasks, delete_task, update_task_status
 
 app = Flask(__name__)
 
@@ -25,7 +25,7 @@ TASK_CATEGORIES = [
     "Note"
 ]
 
-# homepage
+
 @app.route("/")
 @login_required
 def homepage():
@@ -33,6 +33,7 @@ def homepage():
     tasks = get_user_tasks(session["user_id"][0])
 
     return render_template("homepage.html", tasks=tasks)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -66,6 +67,7 @@ def login():
     else:
         return render_template("login.html")
 
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
@@ -89,7 +91,6 @@ def register():
         # encrypt user password
         passwordStore = generate_password_hash(password)
 
-
         if registerNewUser(username, passwordStore):
             return redirect("/")
 
@@ -107,6 +108,12 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")
+
+@app.route("/pomodoroTimer")
+@login_required
+def pomodoroTimer():
+    return render_template("pomodoroTimer.html")
+
 
 @app.route("/newTask", methods=["GET", "POST"])
 @login_required
@@ -131,16 +138,24 @@ def newTask():
     # if GET render the form for creating a new task
     return render_template("newTask.html", task_categories=TASK_CATEGORIES)
 
-@app.route("/taskHandler", methods=["GET", "POST"])
-@login_required
-def taskHandler():
-    print(request)
-    if request.method == "POST":
-        req = request.get_json()
-        print(req)
-        id_delete = req['request']
-        print(id_delete)
-        
-        # delete method to helpers
 
-    return apology("route is only for post requests.")
+@app.route("/task_handler", methods=["DELETE", "PUT"])
+@login_required
+def task_handler():
+
+    if request.method == "DELETE":
+        req = request.get_json()
+        id_delete = req["task_id"]
+        if delete_task(id_delete):
+            return "OK"
+        else:
+            return "delete: failed"
+    elif request.method == "PUT":
+        req = request.get_json()
+        id_done_task = req["task_id"]
+        if update_task_status(id_done_task):
+            return "OK"
+        else:
+            return "update: failed"
+
+    return "route only for delete or put requests"

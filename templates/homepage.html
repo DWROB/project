@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block javascript %}
 <script src="static/homepageCards.js"></script>
-<script src="static/homepageTaskHandler.js" ></script>
+<script src="static/homepageTaskHandler.js"></script>
 {% endblock %} {% block title %} Your Tasks {% endblock %} {% block main %}
 <div class="tasks-container">
   <div class="homepage-canvas">
@@ -18,10 +18,10 @@
       </div>
       <div class="card-item-notes">
         <p>{{ task["task_notes"].capitalize() }}</p>
+        <h2>{{ task["task_completed"] }}</h2>
       </div>
       <div class="card-task-buttons">
         <button
-          type="submit"
           class="btn primary-btn"
           id="done"
           value="{{ task['task_id'] }}"
@@ -29,7 +29,6 @@
           Done
         </button>
         <button
-          type="submit"
           class="btn button-warning"
           id="delete"
           value="{{ task['task_id'] }}"
