@@ -65,6 +65,7 @@ def registerNewUser(username, passwordStore):
 
     return False
 
+
 def loginCheck(username, password):
     cur = conn.cursor()
 
@@ -74,7 +75,6 @@ def loginCheck(username, password):
     cur.execute("SELECT hash FROM users WHERE username = ?", (username,))
     passwordCheck = cur.fetchone()
 
-
     if len(usernameFound) != 1 or not check_password_hash(passwordCheck[0], password):
         cur.close()
         return None
@@ -83,6 +83,7 @@ def loginCheck(username, password):
         user_id = cur.fetchone()
         cur.close()
         return user_id
+
 
 def validate_task(task):
     # nothing empty, except notes.
@@ -107,6 +108,7 @@ def save_new_task(task_new):
     conn.commit()
     return True
 
+
 def get_user_tasks(user_id):
     user_task_query = "SELECT * FROM tasks WHERE user_id = ?"
 
@@ -126,13 +128,43 @@ def get_user_tasks(user_id):
         task["task_location"] = task_entry[6]
         task["task_notes"] = task_entry[4]
         task["task_created"] = task_entry[3]
-        task["task_updated_at"] = task_entry[9]
+        task["task_updated_at"] = task_entry[10]
         task["task_id"] = task_entry[0]
 
-        if task_entry[10] == "0":
+        if task_entry[9] == 0:
             task["task_completed"] = False
         else:
             task["task_completed"] = True
         tasks.append(task)
 
     return tasks
+
+
+def update_task_status(task_id):
+    cur = conn.cursor()
+    cur.execute("SELECT complete FROM tasks WHERE id = ?", (task_id))
+    task_db_complete_record = cur.fetchone()
+
+    if task_db_complete_record[0] == 0:
+        # print(task_db_complete_record == 0)
+        # print(task_db_complete_record[0] == 0)
+        update_query = "UPDATE tasks SET complete = ? WHERE id = ?"
+        query_values = [(1, task_id)]
+        cur.execute(update_query, query_values[0])
+        conn.commit()
+        return True
+    elif task_db_complete_record[0] == 1:
+        update_query = "UPDATE tasks SET complete = ? WHERE id = ?"
+        query_values = [(0, task_id)]
+        cur.execute(update_query, query_values[0])
+        conn.commit()
+        return True
+    return False
+
+
+def delete_task(task_id):
+    cur = conn.cursor()
+    cur.execute("DELETE FROM tasks WHERE id = ?", (task_id))
+    if conn.commit():
+        return True
+    return False
