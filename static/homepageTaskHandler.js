@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   deleteBtns.forEach(function (deleteBtn) {
     deleteBtn.addEventListener("click", async function () {
-      console.log(deleteBtn.classList);
       tasksCards.forEach(function (taskCard) {
         if (taskCard.id === deleteBtn.value) {
           taskCard.remove();
@@ -50,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => {
       if (response.status != 200) {
         console.log(`Request status is ${response.status}`);
-        console.log(response)
         return;
       }
       response.json().then((data) => { console.log(data, response.status) })
@@ -58,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const deleteTask = (id) => {
-    // console.log(`${window.origin}/task_handler`);
     fetch("/task_handler", {
       method: "DELETE",
       headers: new Headers({

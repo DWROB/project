@@ -146,8 +146,6 @@ def update_task_status(task_id):
     task_db_complete_record = cur.fetchone()
 
     if task_db_complete_record[0] == 0:
-        # print(task_db_complete_record == 0)
-        # print(task_db_complete_record[0] == 0)
         update_query = "UPDATE tasks SET complete = ? WHERE id = ?"
         query_values = [(1, task_id)]
         cur.execute(update_query, query_values[0])

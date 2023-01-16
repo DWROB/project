@@ -7,9 +7,9 @@
 
 A todo list designed to help me, and others, keep an easy record of tasks, appointments and events.
 
-The site will include a classic pomodoro timer.  User will be able to select a typical 25 minute interval for focussing.  The app includes the classical incremental pomodoro structure, with longer periods to train ability to focus for longer periods.
+The site will include a classic pomodoro timer.  User will be able to select a typical 25 minute interval for focusing.  The app includes the classical incremental pomodoro structure, with longer periods to train ability to focus for longer periods.
 
-Initial design is for desktop use only.  The main consideration being that my use of modals, coupled with my inexperience, means that it would take longer to create.
+The design will be responsive to all screen sizes. A max of 5 cards in a row on the biggest screens and 1 card per row for the smallest.
 
 Using the Flask framework, the app will:
 
@@ -32,7 +32,6 @@ Using the Flask framework, the app will:
 
 #### /login
 * Get - renders the login screen.
-
 * Post - users login and password are checked on db.  If user exists and password matches, the users id is set as session["user_id"] for all actions.
 
 #### /register
@@ -41,6 +40,7 @@ Using the Flask framework, the app will:
 * Post - account created.  Werkzeug handling hashing of the password in db.
 
 #### /logout
+clears session.
 
 #### /newTask
 * form for creating a customizable task
@@ -48,7 +48,9 @@ Using the Flask framework, the app will:
 * category
   * task, appointment, event, note + other customisable cats*
 
-#### /taskHandler
+#### /task_handler
+Methods DELETE || PUT only.
+AJAX method called by Js.
 * updates db from user actions on task-cards.
   * Either change 'complete' to True/False.
   * or Delete the task from the db.
@@ -69,20 +71,52 @@ Using the Flask framework, the app will:
 * decorated function to ensure user is logged in
 * all db interactions managed in helpers.
 
+#### apology
+* standard error function with dynamic string parameter to provide detailed feedback on nature of errors.
+
+#### usernameTaken
+Accepts one parameter, a username provided by user when creating an accounts.
+Returns False is the username already exists in the database.
+
+#### registerNewUser
+Accepts two parameters - username and passwordStore (a password already hashed by calling function).
+calls userNameTaken() and if False - username available - creates new user in db.
+
+#### loginCheck
+Accepts two parameter, username and password (entered by user on login form) verifies the user name and the user's password via hash.
+
+#### validate_task
+accepts one parameter a task dict.  Verifies that task has required data and not null.
+
+#### save_new_task
+accepts one parameter a task dict.  Inserts all data - alrerady validated - into db with user_id as its FK.
+
+#### get_user_tasks
+index function.  With parameter user_id fetch all tasks in db that belong to the user_id.
+
+Normally a user has more than one task.  Therefore looping through the fetch response and creating a dict object of each task.
+
+#### update_task_status
+accepts one parameter, task_id.  Fetches the task pertaining to this task_id.  Will toggle value between 0 and 1.
+
+#### delete_task
+Same process as update but simpler as it simply deletes the record; therefore no need to fetch the record with SELECT query.
+
 ## static
 
 1. stylesheet:
 * styles.css
   * /components:
-  * cards.css
-  * forms.css
-  * navbar.css
-  * pomo-container.css
+    * cards.css
+    * forms.css
+    * navbar.css
+    * pomo-container.css
 
 2. JavaScript Files
 * timer.js - manipulates DOM to show countdown for focus time.
-* homepageCards.js - to handle drag and drop functions for the users cards
-* homepageTaskHandler - to handle changes to card when task completed or deleted.  In addition to updating the db
+* homepageTaskHandler
+  * handle changes to card when task completed or deleted by removing or altering the class within the DOM
+  * In addition triggering a AJAX function to make relevant changes in the db without refreshing the page.  
 
 ## templates
 

@@ -10,14 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   timeChoice.addEventListener("change", function (e) {
     selection = e.target.value;
-    console.log(selection);
     return selection;
   });
 
   startBtn.addEventListener("click", function () {
-    console.log("start button " + selection);
-    console.log(typeof selection);
-
     var minutes;
     var seconds;
 
@@ -26,28 +22,24 @@ document.addEventListener("DOMContentLoaded", function () {
         // 5 seconds
         minutes = 0;
         seconds = 5;
-        console.log(minutes + ":" + seconds);
         intervalID = setInterval(pomoCounter, 1000);
         return minutes, seconds;
       case "2":
         // 30 minutes
         minutes = 29;
         seconds = 60;
-        console.log(minutes + ":" + seconds);
         intervalID = setInterval(pomoCounter, 1000);
         return minutes, seconds;
       case "3":
         // 35 minutes
         minutes = 34;
         seconds = 60;
-        console.log(minutes + ":" + seconds);
         intervalID = setInterval(pomoCounter, 1000);
         return minutes, seconds;
       case "4":
         // 40
         minutes = 39;
         seconds = 60;
-        console.log(minutes + ":" + seconds);
         intervalID = setInterval(pomoCounter, 1000);
         return minutes, seconds;
       default:
@@ -60,12 +52,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (minutes > 0 && seconds === 0) {
         minutes--;
         seconds = 60;
-        console.log(minutes + ":" + seconds);
       }
 
       // decrement seconds
       seconds--;
-      console.log(minutes + ":" + seconds);
 
       // TO DO:  put the counter on the DOM
       if (seconds < 10) {
