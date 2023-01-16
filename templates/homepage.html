@@ -5,7 +5,10 @@
 <div class="tasks-container">
   <div class="homepage-canvas">
     {% for task in tasks %}
-    <div class="card-item" id="{{ task['task_id'] }}">
+    <div
+      class="{% if task['task_completed'] %}card-item task-done-color{% else %}card-item{% endif %}"
+      id="{{ task['task_id'] }}"
+    >
       <div>
         <h3>{{ task["task_name"].capitalize() }}</h3>
       </div>
@@ -18,15 +21,10 @@
       </div>
       <div class="card-item-notes">
         <p>{{ task["task_notes"].capitalize() }}</p>
-        <h2>{{ task["task_completed"] }}</h2>
       </div>
       <div class="card-task-buttons">
-        <button
-          class="btn primary-btn"
-          id="done"
-          value="{{ task['task_id'] }}"
-        >
-          Done
+        <button class="btn primary-btn" id="done" value="{{ task['task_id'] }}">
+          {% if task["task_completed"] %} Reset! {% else %} Done {% endif %}
         </button>
         <button
           class="btn button-warning"

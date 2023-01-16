@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
   tasksCards = document.querySelectorAll(".card-item");
 
   // task delete - remove from db and dom
-
   doneBtns = document.querySelectorAll("#done");
   deleteBtns = document.querySelectorAll("#delete");
 
